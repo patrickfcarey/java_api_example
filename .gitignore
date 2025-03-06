@@ -1,0 +1,36 @@
+# Java compiled output
+*.class
+
+# Log files
+*.log
+
+# Dependency directories
+/target/             # Maven build output
+/build/              # Gradle build output
+/out/                # IntelliJ output directory
+
+# Dependency management
+/.m2/                # Maven local repository (optional, if stored in project)
+/.gradle/            # Gradle cache directory
+
+# IDE files
+/.idea/              # IntelliJ IDEA project files
+*.iml                # IntelliJ module files
+/.classpath          # Eclipse classpath
+/.project            # Eclipse project file
+/.settings/          # Eclipse settings directory
+
+# Package files
+*.jar                # Ignore JAR files in the root (unless intentionally included)
+*.war
+*.ear
+
+# Miscellaneous
+*.DS_Store           # macOS system files
+*.swp                # Vim swap files
+Thumbs.db            # Windows thumbnail cache
+
+# Environment files (optional)
+.env                 # Environment variables
+*.properties         # Configuration properties (if sensitive)
+
