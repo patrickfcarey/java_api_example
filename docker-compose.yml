@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  myapp-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql-container:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-container:3306/myapp?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=changeme
+      - SPRING_DATASOURCE_INITIALIZATION_FAIL_TIMEOUT=60
+      - SPRING_DATASOURCE_CONTINUE_ON_ERROR=true
+
+    networks:
+      - myapp-network
+
+  mysql-container:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=changeme
+      - MYSQL_DATABASE=myapp
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"  # Expose to host
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pchangeme"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - myapp-network
+
+networks:
+  myapp-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+      external: true  # Use the existing mysql-data volume
+

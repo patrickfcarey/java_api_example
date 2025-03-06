@@ -1,0 +1,10 @@
+{
+    "java.project.sourcePaths": [
+        "src/main/java"
+    ],
+    "java.project.referencedLibraries": [
+        "target/lib/*.jar",
+        "~/.m2/repository/**/*.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
